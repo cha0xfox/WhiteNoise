@@ -4,31 +4,12 @@
 #include <time.h>
 #include <math.h>
 
+
+// -- User includes
+
+#include "functions.hpp"
+
 #define RAND_NUM  128 //Size of random array
-
-void randvec(double array[]){
-      for ( int i = 0; i< RAND_NUM; i++){
-            array[i] = rand()%13; // 0 - 12
-      }
-}
-
-int countOccurrences(double arr[], int n, int x) 
-{ 
-    int res = 0; 
-    for (int i=0; i<n; i++) 
-        if (x == arr[i]) 
-          res++; 
-    return res; 
-}
-
-void autofunc(double w[] ,double arr1[], double arr2[], int arrlen1, int arrlen2){
-      for (int k = 0; k < RAND_NUM*2-1; k++){
-            w[k] = 0;
-            for (int i = std::max(0,k-arrlen2+1); i < std::min(k+1,arrlen1); i++){
-                  w[k] += round((arr1[i] * arr2[k - i])/10);
-            }
-    }
-} 
 
 int main( int argc, char* argv[] )
 {     
@@ -49,10 +30,10 @@ int main( int argc, char* argv[] )
             randvec(arrayofnum);
             sum = 0;
             for (int j = 0; j<RAND_NUM; j++){
-                  sum += (arrayofnum[j]-6);
+                  sum += arrayofnum[j];
             }
-            std::cout << sum << std::endl;
-            whitenoise[i]=sum/2;
+            //std::cout << sum << std::endl;
+            whitenoise[i]=(sum-RAND_NUM/2)/2;
       }
 
       double autowhite[RAND_NUM*2-1];
@@ -66,7 +47,7 @@ int main( int argc, char* argv[] )
       std::cout << "File openned.\n";
 
       csvf << "Part 1 : flat after rand()" << "\n";
-      for (int i = 0; i<13; i++){
+      for (double i = 0.00; i<1.01; i=i+0.01){
             csvf << countOccurrences(arrayofnum, sizeof(arrayofnum)/sizeof(double), i) << ";";
       }
 
@@ -81,7 +62,7 @@ int main( int argc, char* argv[] )
       csvf << "\n";
 
       csvf << "Part 2 : white noise" << "\n";
-      for (int i = -RAND_NUM/2; i<RAND_NUM/2; i++){
+      for (double i = -2; i<2; i=i+0.01){
             csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ";";
       }
 
