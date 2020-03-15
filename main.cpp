@@ -9,7 +9,7 @@
 
 #include "functions.hpp"
 
-#define RAND_NUM  128 //Size of random array
+#define RAND_NUM  256 //Size of random array
 
 int main( int argc, char* argv[] )
 {     
@@ -62,7 +62,7 @@ int main( int argc, char* argv[] )
       csvf << "\n";
 
       csvf << "Part 2 : white noise" << "\n";
-      for (double i = -2; i<2; i=i+0.01){
+      for (double i = -4; i<4; i=i+0.01){
             csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ";";
       }
 

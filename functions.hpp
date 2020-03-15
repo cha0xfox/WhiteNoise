@@ -1,4 +1,4 @@
-#define RAND_NUM 128
+#define RAND_NUM 256
 
 void randvec(double array[]){
       for ( int i = 0; i< RAND_NUM; i++){
