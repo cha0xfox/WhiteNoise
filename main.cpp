@@ -17,13 +17,15 @@ int main( int argc, char* argv[] )
       std::srand(time(nullptr));
 
       std::cout << "Main calculations\n";
+
+      // ----------------PART 1
       double arrayofnum[RAND_NUM];
       randvec(arrayofnum);
 
       double autof[RAND_NUM*2-1];
       autofunc(autof, arrayofnum, arrayofnum, RAND_NUM, RAND_NUM);
       
-      
+      //-----------------PART 2
       double whitenoise[RAND_NUM]; 
       double sum;
       for (int i = 0; i<RAND_NUM ; i++){
@@ -39,6 +41,16 @@ int main( int argc, char* argv[] )
       double autowhite[RAND_NUM*2-1];
       //randvec(arrayofnum);
       autofunc (autowhite, whitenoise, whitenoise, RAND_NUM, RAND_NUM);
+
+      //-----------------PART 3
+
+      double expwhite[RAND_NUM];
+      double arrayofnum2[RAND_NUM];
+      randvec(arrayofnum);
+      randvec(arrayofnum2);
+      expcalc(expwhite,arrayofnum,arrayofnum);
+
+      //-----------------WRITING TO FILE
       
       std::cout << "Openning csv file...\n";
       std::ofstream csvf;
@@ -72,10 +84,17 @@ int main( int argc, char* argv[] )
       csvf << "Part 2 : autof of white noise" << "\n";
       for (int i = 0; i<RAND_NUM*2-1; i++){
             csvf << autowhite[i] << ";";
+      } 
+      
+      csvf << "\n";
+
+      csvf << "Part 3 : exp" << "\n";
+      for (int i = 0; i<RAND_NUM; i++){
+            csvf << expwhite[i] << ";";
       }
 
       csvf.close();
-
+      std::cout << "File closed." << std::endl;
       //system("pause");
       return 0;
 }

@@ -1,4 +1,6 @@
 #define RAND_NUM 256
+#define PI 3.141592653589793
+
 
 void randvec(double array[]){
       for ( int i = 0; i< RAND_NUM; i++){
@@ -14,11 +16,9 @@ bool compare(double a, double b)
 int countOccurrences(double arr[], int n, double x) 
 { 
     int res = 0; 
-    for (int i=0; i<n; i++){ 
+    for (int i=0; i<n; i++) 
         if (compare(arr[i],x))
           res++; 
-      //std::cout << arr[i] << " : " << x << std::endl;
-    }
     return res; 
 }
 
@@ -30,3 +30,9 @@ void autofunc(double w[] ,double arr1[], double arr2[], int arrlen1, int arrlen2
             }
     }
 } 
+
+void expcalc(double w[], double arr1[], double arr2[]){
+      for (int k = 0; k < RAND_NUM; k++){
+            w[k] = sqrt(-2*log(arr1[k]))*cos(2*PI*arr2[k]);
+    }
+}
