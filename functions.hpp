@@ -31,8 +31,20 @@ void autofunc(double w[] ,double arr1[], double arr2[], int arrlen1, int arrlen2
     }
 } 
 
-void expcalc(double w[], double arr1[], double arr2[]){
+void expcalccos(double w[], double arr1[], double arr2[]){
       for (int k = 0; k < RAND_NUM; k++){
             w[k] = sqrt(-2*log(arr1[k]))*cos(2*PI*arr2[k]);
+    }
+}
+
+void expcalcsin(double w[], double arr1[], double arr2[]){
+      for (int k = 0; k < RAND_NUM; k++){
+            w[k] = sqrt(-2*log(arr1[k]))*sin(2*PI*arr2[k]);
+    }
+}
+
+void laplas(double arrr[],double arrx[], double arry[]){
+      for (int k = 0; k < RAND_NUM; k++){
+            arrr[k] = sqrt(pow(arrx[k],2)+pow(arry[k],2));
     }
 }

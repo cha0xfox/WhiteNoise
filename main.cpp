@@ -48,7 +48,23 @@ int main( int argc, char* argv[] )
       double arrayofnum2[RAND_NUM];
       randvec(arrayofnum);
       randvec(arrayofnum2);
-      expcalc(expwhite,arrayofnum,arrayofnum);
+      expcalcsin(expwhite,arrayofnum,arrayofnum2);
+
+      //-----------------PART 4
+
+      
+      double expwhite1[RAND_NUM];
+      
+      randvec(arrayofnum);
+      randvec(arrayofnum2);
+      expcalcsin(expwhite,arrayofnum,arrayofnum2);
+      
+      randvec(arrayofnum);
+      randvec(arrayofnum2);
+      expcalcsin(expwhite1,arrayofnum,arrayofnum2);
+
+      double arrlaplas[RAND_NUM];
+      laplas(arrlaplas,expwhite,expwhite1);
 
       //-----------------WRITING TO FILE
       
@@ -88,9 +104,23 @@ int main( int argc, char* argv[] )
       
       csvf << "\n";
 
-      csvf << "Part 3 : exp" << "\n";
+      csvf << "Part 3 : exp cos" << "\n";
       for (int i = 0; i<RAND_NUM; i++){
             csvf << expwhite[i] << ";";
+      }
+
+      csvf << "\n";
+
+      csvf << "Part 3 : exp sin" << "\n";
+      for (int i = 0; i<RAND_NUM; i++){
+            csvf << expwhite1[i] << ";";
+      }
+
+      csvf << "\n";
+
+      csvf << "Part 4 : exp" << "\n";
+      for (int i = 0; i<RAND_NUM; i++){
+            csvf << arrlaplas[i] << ";";
       }
 
       csvf.close();
