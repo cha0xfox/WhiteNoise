@@ -1,4 +1,4 @@
-#define RAND_NUM 256
+#define RAND_NUM 512
 #define PI 3.141592653589793
 
 
@@ -48,3 +48,18 @@ void laplas(double arrr[],double arrx[], double arry[]){
             arrr[k] = sqrt(pow(arrx[k],2)+pow(arry[k],2));
     }
 }
+
+void normalize(double arr[]){
+      double sum;
+      double arrayofnum[RAND_NUM];
+      for (int i = 0; i<RAND_NUM ; i++){
+            randvec(arrayofnum);
+            sum = 0;
+            for (int j = 0; j<RAND_NUM; j++){
+                  sum += arrayofnum[j];
+            }
+            //std::cout << sum << std::endl;
+            arr[i]=(sum-RAND_NUM/2)/2;
+      }
+}
+

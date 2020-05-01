@@ -9,7 +9,7 @@
 
 #include "functions.hpp"
 
-#define RAND_NUM  256 //Size of random array
+#define RAND_NUM  512 //Size of random array
 
 int main( int argc, char* argv[] )
 {     
@@ -27,20 +27,13 @@ int main( int argc, char* argv[] )
       
       //-----------------PART 2
       double whitenoise[RAND_NUM]; 
-      double sum;
-      for (int i = 0; i<RAND_NUM ; i++){
-            randvec(arrayofnum);
-            sum = 0;
-            for (int j = 0; j<RAND_NUM; j++){
-                  sum += arrayofnum[j];
-            }
-            //std::cout << sum << std::endl;
-            whitenoise[i]=(sum-RAND_NUM/2)/2;
-      }
-
+      normalize(whitenoise);
       double autowhite[RAND_NUM*2-1];
       //randvec(arrayofnum);
       autofunc (autowhite, whitenoise, whitenoise, RAND_NUM, RAND_NUM);
+
+      double dirrak[RAND_NUM*4-1];
+      autofunc (dirrak, autowhite, autowhite, RAND_NUM*2-1, RAND_NUM*2-1);
 
       //-----------------PART 3
 
@@ -48,11 +41,12 @@ int main( int argc, char* argv[] )
       double arrayofnum2[RAND_NUM];
       randvec(arrayofnum);
       randvec(arrayofnum2);
-      expcalcsin(expwhite,arrayofnum,arrayofnum2);
+      double white2[RAND_NUM];
+      normalize(white2);
+      expcalcsin(expwhite,whitenoise,white2);
 
       //-----------------PART 4
 
-      
       double expwhite1[RAND_NUM];
       
       randvec(arrayofnum);
@@ -71,56 +65,62 @@ int main( int argc, char* argv[] )
       std::cout << "Openning csv file...\n";
       std::ofstream csvf;
       
-      csvf.open ("histogramm.csv");
+      csvf.open ("histogramm.txt");
       std::cout << "File openned.\n";
 
-      csvf << "Part 1 : flat after rand()" << "\n";
+      // line 0
       for (double i = 0.00; i<1.01; i=i+0.01){
-            csvf << countOccurrences(arrayofnum, sizeof(arrayofnum)/sizeof(double), i) << ";";
+            csvf << countOccurrences(arrayofnum, sizeof(arrayofnum)/sizeof(double), i) << ",";
       }
 
       csvf << "\n";
 
-      csvf << "Part 1 : auto function" << "\n";
+      // line 1
       for (int i = 0; i<RAND_NUM*2-1; i++){
-            csvf << autof[i] << ";";
+            csvf << autof[i] << ",";
+      }
+
+      csvf << "\n";
+
+      // line 2
+      for (double i = -RAND_NUM/6; i<RAND_NUM/6; i=i+0.01){
+            csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ",";
       }
 
 
       csvf << "\n";
 
-      csvf << "Part 2 : white noise" << "\n";
-      for (double i = -4; i<4; i=i+0.01){
-            csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ";";
-      }
-
-
-      csvf << "\n";
-
-      csvf << "Part 2 : autof of white noise" << "\n";
+      // line 3
       for (int i = 0; i<RAND_NUM*2-1; i++){
-            csvf << autowhite[i] << ";";
+            csvf << autowhite[i] << ",";
       } 
       
       csvf << "\n";
 
-      csvf << "Part 3 : exp cos" << "\n";
+      // line 4
+      for (int i = 0; i<RAND_NUM*4-1; i++){
+            csvf << dirrak[i] << ",";
+      } 
+      
+      csvf << "\n";
+
+      // line 5
       for (int i = 0; i<RAND_NUM; i++){
-            csvf << expwhite[i] << ";";
+            csvf << expwhite[i] << ",";
       }
 
       csvf << "\n";
 
-      csvf << "Part 3 : exp sin" << "\n";
+      // line 6
       for (int i = 0; i<RAND_NUM; i++){
-            csvf << expwhite1[i] << ";";
+            csvf << expwhite1[i] << ",";
       }
 
       csvf << "\n";
 
-      csvf << "Part 4 : exp" << "\n";
+      // line 7
       for (int i = 0; i<RAND_NUM; i++){
-            csvf << arrlaplas[i] << ";";
+            csvf << arrlaplas[i] << ",";
       }
 
       csvf.close();
