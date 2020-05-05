@@ -27,38 +27,40 @@ int main( int argc, char* argv[] )
       
       //-----------------PART 2
       double whitenoise[RAND_NUM]; 
-      normalize(whitenoise);
+      wikirand(whitenoise);
       double autowhite[RAND_NUM*2-1];
-      //randvec(arrayofnum);
       autofunc (autowhite, whitenoise, whitenoise, RAND_NUM, RAND_NUM);
+      
 
-      double dirrak[RAND_NUM*4-1];
-      autofunc (dirrak, autowhite, autowhite, RAND_NUM*2-1, RAND_NUM*2-1);
+      wikirand(whitenoise);
+      double dirrak[RAND_NUM];
+      corellation(dirrak, whitenoise, whitenoise, RAND_NUM);
 
       //-----------------PART 3
-
+	
       double expwhite[RAND_NUM];
       double arrayofnum2[RAND_NUM];
       randvec(arrayofnum);
       randvec(arrayofnum2);
       double white2[RAND_NUM];
-      normalize(white2);
-      expcalcsin(expwhite,whitenoise,white2);
+      wikirand(white2);
+      expcalcsin(expwhite,arrayofnum,arrayofnum2);
 
       //-----------------PART 4
 
       double expwhite1[RAND_NUM];
       
-      randvec(arrayofnum);
-      randvec(arrayofnum2);
+      wikirand(arrayofnum);
+      wikirand(arrayofnum2);
       expcalcsin(expwhite,arrayofnum,arrayofnum2);
       
-      randvec(arrayofnum);
-      randvec(arrayofnum2);
+      wikirand(arrayofnum);
+      wikirand(arrayofnum2);
       expcalcsin(expwhite1,arrayofnum,arrayofnum2);
 
       double arrlaplas[RAND_NUM];
       laplas(arrlaplas,expwhite,expwhite1);
+
 
       //-----------------WRITING TO FILE
       
@@ -67,6 +69,8 @@ int main( int argc, char* argv[] )
       
       csvf.open ("histogramm.txt");
       std::cout << "File openned.\n";
+
+      wikirand(arrayofnum);
 
       // line 0
       for (double i = 0.00; i<1.01; i=i+0.01){
@@ -83,7 +87,7 @@ int main( int argc, char* argv[] )
       csvf << "\n";
 
       // line 2
-      for (double i = -RAND_NUM/6; i<RAND_NUM/6; i=i+0.01){
+      for (double i = -RAND_NUM/6; i<RAND_NUM/6; i=i+0.001){
             csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ",";
       }
 
@@ -91,34 +95,42 @@ int main( int argc, char* argv[] )
       csvf << "\n";
 
       // line 3
+      for (int i = 0; i<RAND_NUM; i++){
+            csvf << whitenoise[i] << ",";
+      }
+
+
+      csvf << "\n";
+
+      // line 4
       for (int i = 0; i<RAND_NUM*2-1; i++){
             csvf << autowhite[i] << ",";
       } 
       
       csvf << "\n";
 
-      // line 4
-      for (int i = 0; i<RAND_NUM*4-1; i++){
+      // line 5
+      for (int i = 0; i<RAND_NUM; i++){
             csvf << dirrak[i] << ",";
       } 
       
       csvf << "\n";
-
-      // line 5
+	
+      // line 6
       for (int i = 0; i<RAND_NUM; i++){
             csvf << expwhite[i] << ",";
       }
 
       csvf << "\n";
 
-      // line 6
+      // line 7
       for (int i = 0; i<RAND_NUM; i++){
             csvf << expwhite1[i] << ",";
       }
 
       csvf << "\n";
 
-      // line 7
+      // line 8
       for (int i = 0; i<RAND_NUM; i++){
             csvf << arrlaplas[i] << ",";
       }
