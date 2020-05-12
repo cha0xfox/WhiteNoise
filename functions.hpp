@@ -4,23 +4,26 @@
 
 void randvec(double array[]){
       for ( int i = 0; i< RAND_NUM; i++){
-            array[i] = (rand()%501)*(0.002); // 0 - 1
+            array[i] = (rand()%51)*(0.02); // 0 - 1
       }
 }
 
 void wikirand(double array[]){
-	for (int i = 0; i < RAND_NUM; i++){
-		array[i] = 2 * ((rand()%501)*(0.002) - 0.5);
-	}
+    srand(time(NULL));
+    for (int i = 0; i < RAND_NUM; i++){
+        array[i] = 0;
+        for (int j = 0; j < 12; j++){
+            array[i]+=((rand()%51)*0.02);
+        }
+        array[i] = (array[i]-6)/2;
+    }
 }
 
-bool compare(double a, double b)
-{
+bool compare(double a, double b){
     return (fabs(a-b) < 0.01);
 }
 
-int countOccurrences(double arr[], int n, double x) 
-{ 
+int countOccurrences(double arr[], int n, double x){ 
     int res = 0; 
     for (int i=0; i<n; i++) 
         if (compare(arr[i],x))

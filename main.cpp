@@ -58,8 +58,6 @@ int main( int argc, char* argv[] )
       randvec(arrayofnum2);
       expcalcsin(expwhite1,arrayofnum,arrayofnum2);
 
-      corellation(dirrak,expwhite1,expwhite1,RAND_NUM);
-
       double arrlaplas[RAND_NUM];
       laplas(arrlaplas,expwhite,expwhite1);
 
@@ -72,24 +70,24 @@ int main( int argc, char* argv[] )
       csvf.open ("histogramm.txt");
       std::cout << "File openned.\n";
 
-      wikirand(arrayofnum);
+      randvec(arrayofnum);
 
       // line 0
-      for (double i = -2.00; i<2.01; i=i+0.01){
-            csvf << countOccurrences(expwhite1, sizeof(expwhite1)/sizeof(double), i) << ",";
+      for (double i = 0.00; i<1.01; i=i+0.01){
+            csvf << countOccurrences(arrayofnum, sizeof(arrayofnum)/sizeof(double), i) << ",";
       }
 
       csvf << "\n";
 
       // line 1
-      for (int i = 0; i<RAND_NUM; i++){
-            csvf << expwhite1[i] << ",";
+      for (int i = 0; i<RAND_NUM*2-1; i++){
+            csvf << autof[i] << ",";
       }
 
       csvf << "\n";
 
       // line 2
-      for (double i = -RAND_NUM/6; i<RAND_NUM/6; i=i+0.001){
+      for (double i = -RAND_NUM/24; i<RAND_NUM/24; i=i+0.001){
             csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ",";
       }
 
