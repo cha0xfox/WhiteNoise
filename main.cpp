@@ -9,7 +9,7 @@
 
 #include "functions.hpp"
 
-#define RAND_NUM  512 //Size of random array
+#define RAND_NUM  1512 //Size of random array
 
 int main( int argc, char* argv[] )
 {     
@@ -19,47 +19,45 @@ int main( int argc, char* argv[] )
       std::cout << "Main calculations\n";
 
       // ----------------PART 1
+      // Генерация равномерного распределения
       double arrayofnum[RAND_NUM];
       randvec(arrayofnum);
-
+      // Автокорелляция равномерного распределения
       double autof[RAND_NUM*2-1];
       autofunc(autof, arrayofnum, arrayofnum, RAND_NUM, RAND_NUM);
       
       //-----------------PART 2
+      // Генерация нормального распределения с нормализацией
       double whitenoise[RAND_NUM]; 
       wikirand(whitenoise);
+      // Автокорелляция нормального распределения
       double autowhite[RAND_NUM*2-1];
       autofunc (autowhite, whitenoise, whitenoise, RAND_NUM, RAND_NUM);
-      
-
-      wikirand(whitenoise);
-      double dirrak[RAND_NUM];
-      corellation(dirrak, whitenoise, whitenoise, RAND_NUM);
 
       //-----------------PART 3
 	
       double expwhite[RAND_NUM];
+      double expwhite2[RAND_NUM];
+      double reley[RAND_NUM];
       double arrayofnum2[RAND_NUM];
       randvec(arrayofnum);
       randvec(arrayofnum2);
-      double white2[RAND_NUM];
-      wikirand(white2);
+
       expcalcsin(expwhite,arrayofnum,arrayofnum2);
+      randvec(arrayofnum);
+      randvec(arrayofnum2);
+      expcalccos(expwhite2,arrayofnum,arrayofnum2);
+      sqrsumm(reley,expwhite,expwhite2);
+      
 
       //-----------------PART 4
 
-      double expwhite1[RAND_NUM];
-      
-      wikirand(arrayofnum);
-      wikirand(arrayofnum2);
-      expcalcsin(expwhite,arrayofnum,arrayofnum2);
-      
-      randvec(arrayofnum);
-      randvec(arrayofnum2);
-      expcalcsin(expwhite1,arrayofnum,arrayofnum2);
-
-      double arrlaplas[RAND_NUM];
-      laplas(arrlaplas,expwhite,expwhite1);
+      // Генерация нормального распределения
+      double white2[RAND_NUM];
+      wikirand(white2);
+      // Корелляция нормального распределения
+      double dirrak[RAND_NUM];
+      corellation(dirrak, white2, white2, RAND_NUM);
 
 
       //-----------------WRITING TO FILE
@@ -71,68 +69,74 @@ int main( int argc, char* argv[] )
       std::cout << "File openned.\n";
 
       randvec(arrayofnum);
-
-      // line 0
+      //plot [0]
       for (double i = 0.00; i<1.01; i=i+0.01){
             csvf << countOccurrences(arrayofnum, sizeof(arrayofnum)/sizeof(double), i) << ",";
       }
-
       csvf << "\n";
 
-      // line 1
+      //plot [1]
       for (int i = 0; i<RAND_NUM*2-1; i++){
             csvf << autof[i] << ",";
       }
-
       csvf << "\n";
 
-      // line 2
+      //plot [2]
       for (double i = -RAND_NUM/24; i<RAND_NUM/24; i=i+0.001){
             csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ",";
       }
-
-
       csvf << "\n";
 
-      // line 3
+      //plot [3]
       for (int i = 0; i<RAND_NUM; i++){
             csvf << whitenoise[i] << ",";
       }
-
-
       csvf << "\n";
 
-      // line 4
+      //plot [4]
       for (int i = 0; i<RAND_NUM*2-1; i++){
             csvf << autowhite[i] << ",";
       } 
-      
+      csvf << "\n";
+	
+      //plot [5]
+      for (int i = 0; i<RAND_NUM; i++){
+            csvf << white2[i] << ",";
+      }
       csvf << "\n";
 
-      // line 5
+      //plot [6]
+      for (double i = -2.0; i<2.01; i=i+0.001){
+            csvf << countOccurrences(white2, sizeof(white2)/sizeof(double),i) << ",";
+      }
+      csvf << "\n";
+      //plot [7]
       for (int i = 0; i<RAND_NUM; i++){
             csvf << dirrak[i] << ",";
       } 
-      
       csvf << "\n";
-	
-      // line 6
+
+      //plot [8]
+      for (double i = -3.0; i<3.01; i=i+0.1){
+            csvf << countOccurrences(expwhite, sizeof(expwhite)/sizeof(double),i) << ",";
+      }
+      csvf << "\n";
+
+      //plot [9]
       for (int i = 0; i<RAND_NUM; i++){
             csvf << expwhite[i] << ",";
       }
-
       csvf << "\n";
 
-      // line 7
-      for (int i = 0; i<RAND_NUM; i++){
-            csvf << expwhite1[i] << ",";
+      //plot [10]
+      for (double i = 0; i<3.01; i=i+0.001){
+            csvf << countOccurrences(reley, sizeof(reley)/sizeof(double),i) << ",";
       }
-
       csvf << "\n";
 
-      // line 8
+      //plot [11]
       for (int i = 0; i<RAND_NUM; i++){
-            csvf << arrlaplas[i] << ",";
+            csvf << reley[i] << ",";
       }
 
       csvf.close();

@@ -1,13 +1,14 @@
-#define RAND_NUM 512
+#define RAND_NUM 1512
 #define PI 3.141592653589793
 
-
+// Генерация равномерного распределения
 void randvec(double array[]){
       for ( int i = 0; i< RAND_NUM; i++){
             array[i] = (rand()%51)*(0.02); // 0 - 1
       }
 }
 
+// Генерация нормализованного распределения (алгоритм вики)
 void wikirand(double array[]){
     srand(time(NULL));
     for (int i = 0; i < RAND_NUM; i++){
@@ -19,10 +20,12 @@ void wikirand(double array[]){
     }
 }
 
+// Сравнение чисел float
 bool compare(double a, double b){
     return (fabs(a-b) < 0.01);
 }
 
+// Подсчет значений для гистограмм
 int countOccurrences(double arr[], int n, double x){ 
     int res = 0; 
     for (int i=0; i<n; i++) 
@@ -31,6 +34,7 @@ int countOccurrences(double arr[], int n, double x){
     return res; 
 }
 
+// Функция сверки, выступает в качестве алгоритма автокорелляции
 void autofunc(double w[] ,double arr1[], double arr2[], int arrlen1, int arrlen2){
       for (int k = 0; k < arrlen1+arrlen2-1; k++){
             w[k] = 0;
@@ -40,24 +44,28 @@ void autofunc(double w[] ,double arr1[], double arr2[], int arrlen1, int arrlen2
     }
 } 
 
+// Рассчет через формулу косинуса
 void expcalccos(double w[], double arr1[], double arr2[]){
       for (int k = 0; k < RAND_NUM; k++){
             w[k] = sqrt(-2*log(arr1[k]))*cos(2*PI*arr2[k]);
     }
 }
 
+// Рассчет через формулу синуса
 void expcalcsin(double w[], double arr1[], double arr2[]){
       for (int k = 0; k < RAND_NUM; k++){
             w[k] = sqrt(-2*log(arr1[k]))*sin(2*PI*arr2[k]);
     }
 }
 
-void laplas(double arrr[],double arrx[], double arry[]){
+// Сумма квадратов двух массивов
+void sqrsumm(double arrr[],double arrx[], double arry[]){
       for (int k = 0; k < RAND_NUM; k++){
             arrr[k] = sqrt(pow(arrx[k],2)+pow(arry[k],2));
     }
 }
 
+// Функция нормализации для массивов равномерного распределения
 void normalize(double arr[]){
       double sum;
       double arrayofnum[RAND_NUM];
@@ -72,6 +80,7 @@ void normalize(double arr[]){
       }
 }
 
+// Функция корелляции
 void corellation(double w[], double array1[], double array2[], int N){
 	for(int i = 0; i < N; i++){
 		w[i]=0;
