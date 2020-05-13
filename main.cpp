@@ -82,7 +82,7 @@ int main( int argc, char* argv[] )
       csvf << "\n";
 
       //plot [2]
-      for (double i = -RAND_NUM/24; i<RAND_NUM/24; i=i+0.001){
+      for (double i = -2; i<2.01; i=i+0.001){
             csvf << countOccurrences(whitenoise, sizeof(whitenoise)/sizeof(double),i) << ",";
       }
       csvf << "\n";
@@ -98,43 +98,32 @@ int main( int argc, char* argv[] )
             csvf << autowhite[i] << ",";
       } 
       csvf << "\n";
-	
-      //plot [5]
-      for (int i = 0; i<RAND_NUM; i++){
-            csvf << white2[i] << ",";
-      }
-      csvf << "\n";
 
-      //plot [6]
-      for (double i = -2.0; i<2.01; i=i+0.001){
-            csvf << countOccurrences(white2, sizeof(white2)/sizeof(double),i) << ",";
-      }
-      csvf << "\n";
-      //plot [7]
+      //plot [5]
       for (int i = 0; i<RAND_NUM; i++){
             csvf << dirrak[i] << ",";
       } 
       csvf << "\n";
 
-      //plot [8]
+      //plot [6]
       for (double i = -3.0; i<3.01; i=i+0.1){
             csvf << countOccurrences(expwhite, sizeof(expwhite)/sizeof(double),i) << ",";
       }
       csvf << "\n";
 
-      //plot [9]
+      //plot [7]
       for (int i = 0; i<RAND_NUM; i++){
             csvf << expwhite[i] << ",";
       }
       csvf << "\n";
 
-      //plot [10]
+      //plot [8]
       for (double i = 0; i<3.01; i=i+0.001){
             csvf << countOccurrences(reley, sizeof(reley)/sizeof(double),i) << ",";
       }
       csvf << "\n";
 
-      //plot [11]
+      //plot [9]
       for (int i = 0; i<RAND_NUM; i++){
             csvf << reley[i] << ",";
       }
