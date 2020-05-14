@@ -107,7 +107,7 @@ int main( int argc, char* argv[] )
 
       //plot [6]
       for (double i = -3.0; i<3.01; i=i+0.01){
-            csvf << countOccurrences(expwhite2, sizeof(expwhite)/sizeof(double),i) << ",";
+            csvf << countOccurrences(expwhite2, sizeof(expwhite2)/sizeof(double),i) << ",";
       }
       csvf << "\n";
 
