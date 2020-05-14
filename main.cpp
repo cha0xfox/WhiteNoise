@@ -106,14 +106,14 @@ int main( int argc, char* argv[] )
       csvf << "\n";
 
       //plot [6]
-      for (double i = -3.0; i<3.01; i=i+0.1){
-            csvf << countOccurrences(expwhite, sizeof(expwhite)/sizeof(double),i) << ",";
+      for (double i = -3.0; i<3.01; i=i+0.01){
+            csvf << countOccurrences(expwhite2, sizeof(expwhite)/sizeof(double),i) << ",";
       }
       csvf << "\n";
 
       //plot [7]
       for (int i = 0; i<RAND_NUM; i++){
-            csvf << expwhite[i] << ",";
+            csvf << expwhite2[i] << ",";
       }
       csvf << "\n";
 

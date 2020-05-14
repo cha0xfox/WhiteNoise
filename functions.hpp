@@ -10,7 +10,6 @@ void randvec(double array[]){
 
 // Генерация нормализованного распределения (алгоритм вики)
 void wikirand(double array[]){
-    srand(time(NULL));
     for (int i = 0; i < RAND_NUM; i++){
         array[i] = 0;
         for (int j = 0; j < 12; j++){
