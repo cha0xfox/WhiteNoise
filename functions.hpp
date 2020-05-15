@@ -44,14 +44,14 @@ void autofunc(double w[] ,double arr1[], double arr2[], int arrlen1, int arrlen2
 } 
 
 // Рассчет через формулу косинуса
-void expcalccos(double w[], double arr1[], double arr2[]){
+void calccos(double w[], double arr1[], double arr2[]){
       for (int k = 0; k < RAND_NUM; k++){
             w[k] = sqrt(-2*log(arr1[k]))*cos(2*PI*arr2[k]);
     }
 }
 
 // Рассчет через формулу синуса
-void expcalcsin(double w[], double arr1[], double arr2[]){
+void calcsin(double w[], double arr1[], double arr2[]){
       for (int k = 0; k < RAND_NUM; k++){
             w[k] = sqrt(-2*log(arr1[k]))*sin(2*PI*arr2[k]);
     }
@@ -80,15 +80,22 @@ void normalize(double arr[]){
 }
 
 // Функция корелляции
-void corellation(double w[], double array1[], double array2[], int N){
+void corellation(double w[], double a[], double b[], int N){
 	for(int i = 0; i < N; i++){
 		w[i]=0;
 		for(int j = 0; j < N; j++){
 			if (j+i<=N)
-				w[i]+=array1[j]*array2[j+i];
+				w[i]+=a[j]*b[j+i];
 			else
-				w[i]+=array1[j]*0;
+				w[i]+=a[j]*0;
 		}
 	w[i]=w[i]/N;
 	}
+}
+
+// Рассчет экспоненциального распределения через сумму квадратов
+void calcexp(double w[], double a[], double b[]){
+    for (int i = 0; i < RAND_NUM; i++){
+        w[i] = pow(a[i],2)+pow(b[i],2);
+    }
 }

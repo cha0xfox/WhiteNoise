@@ -43,10 +43,10 @@ int main( int argc, char* argv[] )
       randvec(arrayofnum);
       randvec(arrayofnum2);
 
-      expcalcsin(expwhite,arrayofnum,arrayofnum2);
+      calcsin(expwhite,arrayofnum,arrayofnum2);
       randvec(arrayofnum);
       randvec(arrayofnum2);
-      expcalccos(expwhite2,arrayofnum,arrayofnum2);
+      calccos(expwhite2,arrayofnum,arrayofnum2);
       sqrsumm(reley,expwhite,expwhite2);
       
 
@@ -59,6 +59,17 @@ int main( int argc, char* argv[] )
       double dirrak[RAND_NUM];
       corellation(dirrak, white2, white2, RAND_NUM);
 
+
+      //-----------------PART 5
+
+      double exp_1[RAND_NUM];
+      wikirand(arrayofnum);
+      wikirand(arrayofnum2);
+      
+      calcexp(exp_1,arrayofnum,arrayofnum);
+      randvec(arrayofnum);
+      double exp_c[RAND_NUM*2-1];
+      autofunc(exp_c,exp_1,exp_1,RAND_NUM,RAND_NUM);
 
       //-----------------WRITING TO FILE
       
@@ -126,6 +137,24 @@ int main( int argc, char* argv[] )
       //plot [9]
       for (int i = 0; i<RAND_NUM; i++){
             csvf << reley[i] << ",";
+      }
+      csvf << "\n";
+
+      //plot [10]
+      for (double i = 0; i<3.01; i=i+0.001){
+            csvf << countOccurrences(exp_1, sizeof(exp_1)/sizeof(double),i) << ",";
+      }
+      csvf << "\n";
+
+      //plot [11]
+      for (int i = 0; i<RAND_NUM; i++){
+            csvf << exp_1[i] << ",";
+      }      
+      csvf << "\n";
+
+      //plot [12]
+      for (int i = 0; i<RAND_NUM*2-1; i++){
+            csvf << exp_c[i] << ",";
       }
 
       csvf.close();
