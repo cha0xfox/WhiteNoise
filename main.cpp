@@ -159,6 +159,5 @@ int main( int argc, char* argv[] )
 
       csvf.close();
       std::cout << "File closed." << std::endl;
-      //system("pause");
       return 0;
 }
